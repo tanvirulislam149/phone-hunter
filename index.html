@@ -13,7 +13,31 @@
 </head>
 
 <body>
-    <h1>Check</h1>
+    <header>
+        <div class="fs-3 fw-bold text-success text-center shadow py-2 mb-4 bg-body rounded">
+            <h1>Phone Store</h1>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div class="container search-size mb-5">
+                <div class="input-group">
+                    <input id="search-box" type="search" class="form-control rounded bg-light"
+                        placeholder="Search For Phone" aria-label="Search" aria-describedby="search-addon" />
+                    <button id="search-btn" type="button"
+                        class="btn btn-outline-success bg-success text-white fw-bold">Search</button>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div id="result-container" class="container">
+                <div id="search-result" class="row row-cols-1 row-cols-md-3 g-4">
+
+                </div>
+            </div>
+        </section>
+
+    </main>
 
 
 
