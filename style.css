@@ -1,6 +1,9 @@
 .search-size{
     width: 50%;
 }
+#show-all-button{
+    display: none;
+}
 
 
 

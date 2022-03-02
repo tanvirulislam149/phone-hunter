@@ -17,8 +17,8 @@ const loadData = () => {
 const displayData = (data) => {
     const detailsContainer = document.getElementById("details");
     detailsContainer.textContent = "";
-    let searchBox = document.getElementById("search-box").value;
-    searchBox = "";
+    let searchBox = document.getElementById("search-box");
+    searchBox.value = "";
     const searchResult = document.getElementById("search-result");
     searchResult.textContent = "";
     const noResultContainer = document.getElementById("no-result-container");
@@ -36,7 +36,6 @@ const displayData = (data) => {
     }
     else {
         data.slice(0, 20).forEach(element => {
-            // console.log(element);
             const card = document.createElement("div");
             card.classList.add("col");
             card.innerHTML = `
@@ -54,6 +53,37 @@ const displayData = (data) => {
             `
             searchResult.appendChild(card);
         });
+        if (data.length > 20) {
+            const showAllButton = document.getElementById("show-all-button");
+            showAllButton.style.display = "block";
+            document.getElementById("show-all-button").addEventListener("click", function () {
+                showAll(data);
+            })
+            const showAll = (data) => {
+                const searchResult = document.getElementById("search-result");
+                searchResult.textContent = "";
+                data.forEach(element => {
+                    const allCard = document.createElement("div");
+                    allCard.classList.add("col");
+                    allCard.innerHTML = `
+                <div class="card h-100">
+                    <img src="${element.image}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h3 class="card-title text-success">${element.brand}</h3>
+                        <h5 class="card-title text-success">${element.phone_name}</h5>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#details" onclick="detailsData('${element.slug}')" id="details-btn" type="button"
+                            class="btn btn-outline-success bg-success text-white fw-bold w-100">Details</a>
+                    </div>
+                </div>
+                `
+                    searchResult.appendChild(allCard);
+                });
+                const showAllButton = document.getElementById("show-all-button");
+                showAllButton.style.display = "none";
+            }
+        }
     }
 }
 // Details load 
@@ -64,7 +94,6 @@ const detailsData = (id) => {
 }
 // Show details Data 
 const displayDetails = (data) => {
-    console.log(data);
     const detailsContainer = document.getElementById("details");
     detailsContainer.textContent = "";
     detailsContainer.innerHTML = `
@@ -102,3 +131,29 @@ const displayDetails = (data) => {
         </div>
     `
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// document.getElementById("show-all-button").addEventListener("click", function () {
+//     showAll();
+// })
+// const showAll = () => {
+//     const searchBox = document.getElementById("search-box").value;
+//     if (searchBox === "") {
+//         console.log("empty")
+//     }
+//     else {
+//         fetch(`https://openapi.programming-hero.com/api/phones?search=${searchBox}`)
+//             .then(response => response.json())
+//             .then(data => displayAllData(data.data))
+//     }
+// }
