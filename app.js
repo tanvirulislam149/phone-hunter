@@ -1,6 +1,7 @@
 document.getElementById("search-btn").addEventListener("click", function () {
     loadData();
 })
+// Load Data from Search 
 const loadData = () => {
     const searchBox = document.getElementById("search-box").value;
     if (searchBox === "") {
@@ -12,6 +13,7 @@ const loadData = () => {
             .then(data => displayData(data.data))
     }
 }
+// display Data 
 const displayData = (data) => {
     const detailsContainer = document.getElementById("details");
     detailsContainer.textContent = "";
@@ -45,8 +47,8 @@ const displayData = (data) => {
                     <h5 class="card-title text-success">${element.phone_name}</h5>
                 </div>
                 <div class="card-footer">
-                    <button onclick="detailsData('${element.slug}')" id="details-btn" type="button"
-                        class="btn btn-outline-success bg-success text-white fw-bold w-100">Details</button>
+                    <a href="#details" onclick="detailsData('${element.slug}')" id="details-btn" type="button"
+                        class="btn btn-outline-success bg-success text-white fw-bold w-100">Details</a>
                 </div>
             </div>
             `
@@ -54,11 +56,13 @@ const displayData = (data) => {
         });
     }
 }
+// Details load 
 const detailsData = (id) => {
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
         .then(response => response.json())
         .then(data => displayDetails(data.data))
 }
+// Show details Data 
 const displayDetails = (data) => {
     console.log(data);
     const detailsContainer = document.getElementById("details");
@@ -70,7 +74,7 @@ const displayDetails = (data) => {
                 <h5 class="card-title fs-6 fw-bold"> Name: </h5>
                 <p> ${data.name}</p>
                 <h5 class="card-title fs-6 fw-bold">Release Date: </h5>
-                <p> ${data.releaseDate}</p>
+                <p> ${data?.releaseDate ?? "Nothing Found"}</p>
                 <h5 class="card-title fs-6 fw-bold"> Chipset: </h5>
                 <p> ${data.mainFeatures.chipSet}</p>
                 <h5 class="card-title fs-6 fw-bold">Display Size: </h5>
