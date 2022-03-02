@@ -3,6 +3,8 @@ document.getElementById("search-btn").addEventListener("click", function () {
 })
 // Load Data from Search 
 const loadData = () => {
+    const spinner = document.getElementById("spinner");
+    spinner.style.display = "block";
     const searchBox = document.getElementById("search-box").value;
     if (searchBox === "") {
 
@@ -33,6 +35,9 @@ const displayData = (data) => {
             <h1>Sorry!!!There is no phone with this name </h1>
         `
         noResultContainer.appendChild(noResult);
+        const showAllButton = document.getElementById("show-all-button");
+        showAllButton.style.display = "none";
+        spinner.style.display = "none";
     }
     else {
         data.slice(0, 20).forEach(element => {
@@ -52,6 +57,7 @@ const displayData = (data) => {
             </div>
             `
             searchResult.appendChild(card);
+            spinner.style.display = "none";
         });
         if (data.length > 20) {
             const showAllButton = document.getElementById("show-all-button");

@@ -4,7 +4,9 @@
 #show-all-button{
     display: none;
 }
-
+#spinner {
+    display: none;
+}
 
 
 
